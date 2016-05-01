@@ -12,15 +12,25 @@
     <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
         <input type="submit" value="搜索" style="height:37px;width:80px"></div>
 </form>
-{% for item in cnt %}
-{{ item }}
-{% endfor %}
-<center><div id="main1" style="width: 600px;height: 400px;"></div></center>
+    <table align="center">
+        <tr>
+            <td><div id="main1" style="width: 600px;height: 400px;"></div></td>
+            <td><div id="main2" style="width: 600px;height: 400px;"></div></td>
+        </tr>
+    </table>
 <script type="text/javascript">
     var mychart1 = echarts.init(document.getElementById('main1'));
     var option1 = {
+        tooltip: {
+            trigger: 'item'
+        },
         title: {
             text: '价格分布'
+        },
+        legend: {
+            x: 'right',
+            orient: 'vertical',
+            data: ['1000元以下', '1000-2000元', '2000-3000元', '3000-4000元', '4000-5000元', '5000元以上']
         },
         series: [
             {
@@ -29,7 +39,7 @@
                 radius: '65%',
                 label: {
                     normal: {
-                        formatter: '{b}:{d}'
+                        formatter: '{d}%'
                     }
                 },
                 data: [
@@ -44,6 +54,25 @@
         ]
     }
     mychart1.setOption(option1)
+    var mychart2 = echarts.init(document.getElementById('main2'));
+    var option2  = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['1000元以下', '1000-2000元', '2000-3000元', '3000-4000元', '4000-5000元', '5000元以上']
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [{
+            name: 'moni',
+            type: 'line',
+            data: {{ cnt }}
+        }]
+    }
+    mychart2.setOption(option2)
 </script>
 
 </body>
