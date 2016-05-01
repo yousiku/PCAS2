@@ -2,12 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>对比结果</title>
+    <style type="text/css">
+        table {border-collapse: collapse;}
+        table td {border: 1px solid #666666;}
+        table th {border: 1px solid #666666;}
+        a{text-decoration: none;}
+    </style>
 </head>
 <body>
-<table>
+<a href="/"><h1 align="center">商品比较分析系统</h1></a><br>
+<form method="get" action="/search/">
+    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
+        <input type="submit" value="搜索" style="height:37px;width:80px"></div>
+</form>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对比结果</h4>
+<hr width="70%">
+<table border="1" width="90%" align="center">
+    <tr>
+        <th>商品名称</th>
+        <th>上市年份</th>
+        <th>输入方式</th>
+        <th>智能机</th>
+        <th>操作系统</th>
+        <th>机身内存</th>
+        <th>屏幕尺寸</th>
+        <th>分辨率</th>
+        <th>GPS</th>
+        <th>后置摄像头</th>
+        <th>前置摄像头</th>
+        <th>Wi-Fi</th>
+        <th>蓝牙</th>
+        <th>电池容量</th>
+        <th>机身尺寸</th>
+        <th>机身重量</th>
+    </tr>
 {% for item in detail_list %}
-    <tr><td>{{item.keywords}}</td><td>{{item.listDate}}</td><td>{{item.inputType}}</td></tr>
+    <tr>
+        <td>{{item.keywords}}</td>
+        <td>{{item.listDate}}</td>
+        <td>{{item.inputType}}</td>
+        <td>{{item.isSmart}}</td>
+        <td>{{item.osVersion}}</td>
+        <td>{{item.mbROM}}</td>
+        <td>{{item.scrSize}}</td>
+        <td>{{item.fenbianlv}}</td>
+        <td>{{item.hvGPS}}</td>
+        <td>{{item.reCamera}}</td>
+        <td>{{item.prCamera}}</td>
+        <td>{{item.hvWiFi}}</td>
+        <td>{{item.hvBlue}}</td>
+        <td>{{item.battery}}</td>
+        <td>{{item.mbSize}}</td>
+        <td>{{item.mbWeight}}</td>
+    </tr>
     {% endfor %}
 </table>
 </body>

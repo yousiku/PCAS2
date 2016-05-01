@@ -1,17 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>jieguo</title>
+    <title>主页</title>
+    <script type="text/javascript" src="./static/echarts.min.js"></script>
 </head>
 <body>
 <br><br><br><br>
 <h1 align="center">商品比较分析系统</h1><br><br>
 <form method="get" action="/search/">
-    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px">
+    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
         <input type="submit" value="搜索" style="height:37px;width:80px"></div>
 </form>
-
+{% for item in cnt %}
+{{ item }}
+{% endfor %}
+<center><div id="main1" style="width: 600px;height: 400px;"></div></center>
+<script type="text/javascript">
+    var mychart1 = echarts.init(document.getElementById('main1'));
+    var option1 = {
+        title: {
+            text: '价格分布'
+        },
+        series: [
+            {
+                name: '数量',
+                type: 'pie',
+                radius: '65%',
+                label: {
+                    normal: {
+                        formatter: '{b}:{d}'
+                    }
+                },
+                data: [
+                    {value: {{ cnt.0 }}, name: '1000元以下'},
+                    {value: {{ cnt.1 }}, name: '1000-2000元'},
+                    {value: {{ cnt.2 }}, name: '2000-3000元'},
+                    {value: {{ cnt.3 }}, name: '3000-4000元'},
+                    {value: {{ cnt.4 }}, name: '4000-5000元'},
+                    {value: {{ cnt.5 }}, name: '5000元以上'}
+                ]
+            }
+        ]
+    }
+    mychart1.setOption(option1)
+</script>
 
 </body>
 </html>

@@ -10,8 +10,14 @@ import jieba
 
 # Create your views here.
 def index(request):
-    string = "helloworld"
-    return render(request,'index.html',{'string':string})
+    cnt = [0,0,0,0,0,0]
+    cnt[0] = len(Mobile.objects.filter(price__range=(0,1000)))
+    cnt[1] = len(Mobile.objects.filter(price__range=(1000,2000)))
+    cnt[2] = len(Mobile.objects.filter(price__range=(2000,3000)))
+    cnt[3] = len(Mobile.objects.filter(price__range=(3000,4000)))
+    cnt[4] = len(Mobile.objects.filter(price__range=(4000,5000)))
+    cnt[5] = len(Mobile.objects.filter(price__gte=5000))
+    return render(request,'index.html',{'cnt': cnt})
 
 def add(request):
     a = request.GET['a']

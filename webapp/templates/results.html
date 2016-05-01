@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>jieguo</title>
+    <title>搜索结果</title>
+    <style type="text/css">
+        a{text-decoration: none;}
+    </style>
 </head>
 <body>
-<h1 align="center">商品比较分析系统</h1><br><br>
+<a href="/"><h1 align="center">商品比较分析系统</h1></a><br>
 <form method="get" action="/search/">
-    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px">
+    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
         <input type="submit" value="搜索" style="height:37px;width:80px"></div>
 </form>
-<div id="cmpProducts">
 
-</div>
 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ len_list }}个结果</h4>
 <hr width="70%">
 <form method="get" action="/addCompare/" target="_blank">
