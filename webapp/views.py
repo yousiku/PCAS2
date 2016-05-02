@@ -10,14 +10,23 @@ import jieba
 
 # Create your views here.
 def index(request):
-    cnt = [0,0,0,0,0,0]
+    cnt = [0,0,0,0,0,0,0]
     cnt[0] = len(Mobile.objects.filter(price__range=(0,1000)))
     cnt[1] = len(Mobile.objects.filter(price__range=(1000,2000)))
     cnt[2] = len(Mobile.objects.filter(price__range=(2000,3000)))
     cnt[3] = len(Mobile.objects.filter(price__range=(3000,4000)))
     cnt[4] = len(Mobile.objects.filter(price__range=(4000,5000)))
-    cnt[5] = len(Mobile.objects.filter(price__gte=5000))
-    return render(request,'index.html',{'cnt': cnt})
+    cnt[5] = len(Mobile.objects.filter(price__range=(5000,6000)))
+    cnt[6] = len(Mobile.objects.filter(price__gte=6000))
+    cntListDate = [0,0,0,0,0,0,0]
+    cntListDate[0] = Mobile.objects.filter(listDate__contains='2016').count()
+    cntListDate[1] = Mobile.objects.filter(listDate__contains='2015').count()
+    cntListDate[2] = Mobile.objects.filter(listDate__contains='2014').count()
+    cntListDate[3] = Mobile.objects.filter(listDate__contains='2013').count()
+    cntListDate[4] = Mobile.objects.filter(listDate__contains='2012').count()
+    cntListDate[5] = Mobile.objects.filter(listDate__contains='2011').count()
+    cntListDate[6] = Mobile.objects.all().count() - (cntListDate[0]+cntListDate[1]+cntListDate[2]+cntListDate[3]+cntListDate[4]+cntListDate[5])
+    return render(request,'index.html',{'cnt': cnt, 'cntListDate': cntListDate})
 
 def add(request):
     a = request.GET['a']

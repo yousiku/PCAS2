@@ -17,8 +17,12 @@
             <td><div id="main1" style="width: 600px;height: 400px;"></div></td>
             <td><div id="main2" style="width: 600px;height: 400px;"></div></td>
         </tr>
+        <tr>
+            <td><div id="main3" style="width: 600px;height: 400px;"></div></td>
+        </tr>
     </table>
 <script type="text/javascript">
+    var priceList = ['1000元以下', '1000-2000元', '2000-3000元', '3000-4000元', '4000-5000元', '5000-6000元','6000元以上'];
     var mychart1 = echarts.init(document.getElementById('main1'));
     var option1 = {
         tooltip: {
@@ -30,7 +34,13 @@
         legend: {
             x: 'right',
             orient: 'vertical',
-            data: ['1000元以下', '1000-2000元', '2000-3000元', '3000-4000元', '4000-5000元', '5000元以上']
+            data: priceList
+        },
+        itemStyle: {
+            emphasis: {
+                shadowBlur: 200,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
         },
         series: [
             {
@@ -48,7 +58,8 @@
                     {value: {{ cnt.2 }}, name: '2000-3000元'},
                     {value: {{ cnt.3 }}, name: '3000-4000元'},
                     {value: {{ cnt.4 }}, name: '4000-5000元'},
-                    {value: {{ cnt.5 }}, name: '5000元以上'}
+                    {value: {{ cnt.5 }}, name: '5000-6000元'},
+                    {value: {{ cnt.6 }}, name: '6000元以上'},
                 ]
             }
         ]
@@ -61,18 +72,61 @@
         },
         xAxis: {
             type: 'category',
-            data: ['1000元以下', '1000-2000元', '2000-3000元', '3000-4000元', '4000-5000元', '5000元以上']
+            data: priceList
         },
         yAxis: {
             type: 'value',
         },
         series: [{
-            name: 'moni',
+            name: '数量',
             type: 'line',
             data: {{ cnt }}
         }]
     }
     mychart2.setOption(option2)
+    var listDateList = ['2016', '2015', '2014', '2013', '2012', '2011', '2010及以前'];
+    var mychart3 = echarts.init(document.getElementById('main3'));
+    var option3 = {
+        tooltip: {
+            trigger: 'item'
+        },
+        title: {
+            text: '上市年份'
+        },
+        legend: {
+            x: 'right',
+            orient: 'vertical',
+            data: listDateList
+        },
+        itemStyle: {
+            emphasis: {
+                shadowBlur: 200,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        },
+        series: [
+            {
+                name: '数量',
+                type: 'pie',
+                radius: '65%',
+                label: {
+                    normal: {
+                        formatter: '{d}%'
+                    }
+                },
+                data: [
+                    {value: {{ cntListDate.0 }}, name: '2016'},
+                    {value: {{ cntListDate.1 }}, name: '2015'},
+                    {value: {{ cntListDate.2 }}, name: '2014'},
+                    {value: {{ cntListDate.3 }}, name: '2013'},
+                    {value: {{ cntListDate.4 }}, name: '2012'},
+                    {value: {{ cntListDate.5 }}, name: '2011'},
+                    {value: {{ cntListDate.6 }}, name: '2010及以前'},
+                ]
+            }
+        ]
+    }
+    mychart3.setOption(option3);
 </script>
 
 </body>
