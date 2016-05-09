@@ -9,6 +9,67 @@
         table th {border: 1px solid #666666;}
         a{text-decoration: none;}
     </style>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script>
+        var args = ['上市年份', '机身内存', '分辨率', '屏幕尺寸', 'GPS', '后置摄像头', '前置摄像头', '电池容量'];
+		$(function () {
+
+			$('#container').highcharts({
+
+				chart: {
+					polar: true,
+					type: 'line'
+				},
+
+				title: {
+					text: '对比结果',
+					x: -80    //水平偏移量
+				},
+
+				pane: {
+					size: '80%'    //所占区域比例
+				},
+
+				xAxis: {
+					categories: args,
+					tickmarkPlacement: 'on',    //刻度线对齐方式
+					lineWidth: 0
+				},
+
+				yAxis: {
+					gridLineInterpolation: 'polygon',    //圆形还是多边形的网格线
+					lineWidth: 0,
+					min: 0
+				},
+
+				tooltip: {
+					shared: true,
+					pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+				},
+
+				legend: {
+					align: 'right',
+					verticalAlign: 'top',
+					y: 70,
+					layout: 'vertical'
+				},
+
+				series: [
+				{% for item in detail_list %}
+				{
+				    name: '{{item.keywords}}',
+				    data: [50000, 39000, 42000, 31000, 26000, 14000, 30000,5000],
+				    pointPlacement: 'on'
+				},
+				{% endfor %}
+				]
+
+			});
+		});
+   </script>
 </head>
 <body>
 <a href="/"><h1 align="center">商品比较分析系统</h1></a><br>
@@ -58,5 +119,6 @@
     </tr>
     {% endfor %}
 </table>
+<div id="container" style="max-width: 1000px; margin: 0 auto"></div>
 </body>
 </html>

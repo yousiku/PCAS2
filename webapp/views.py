@@ -61,7 +61,6 @@ def pipeidu(str_keywords,list_fenci):
 def addCompare(request):
     id_list = request.GET.getlist('mobile')
     detail_list = []
-    print id_list
     for id in id_list:
         details = Mobile.objects.get(skuid=id)
         detail_list.append(details)
