@@ -14,7 +14,7 @@
     <script src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
     <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
     <script>
-        var args = ['上市年份', '机身内存', '分辨率', '屏幕尺寸', 'GPS', '后置摄像头', '前置摄像头', '电池容量'];
+        var args = ['上市年份', '输入方式', '智能机', '机身内存', 'GPS', '后置摄像头', '前置摄像头', 'WiFi', '蓝牙'];
 		$(function () {
 
 			$('#container').highcharts({
@@ -58,10 +58,10 @@
 				},
 
 				series: [
-				{% for item in detail_list %}
+				{% for item in data_list %}
 				{
-				    name: '{{item.keywords}}',
-				    data: [50000, 39000, 42000, 31000, 26000, 14000, 30000,5000],
+				    name: '{{item.9}}',
+				    data: [{{item.0}},{{item.1}},{{item.2}},{{item.3}},{{item.4}},{{item.5}},{{item.6}},{{item.7}},{{item.8}}],
 				    pointPlacement: 'on'
 				},
 				{% endfor %}
