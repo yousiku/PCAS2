@@ -74,5 +74,4 @@ def addCompare(request):
         data_num = map(float,data)
         data_num.append(details.keywords)
         data_list.append(data_num)
-    print data_list
     return render(request,'cmps.html',{'detail_list':detail_list, 'data_list': data_list})
