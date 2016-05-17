@@ -3,7 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
-    <script type="text/javascript" src="./static/echarts.min.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script>
+        $(function () {
+            $('#container1').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '手机品牌数量前十分布'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '数量',
+                    data: [
+                        ['中兴', 280],
+                        ['华为', 247],
+                        ['三星', 218],
+                        ['酷派', 186],
+                        ['小米', 129],
+                        ['索尼', 118],
+                        ['海尔', 94],
+                        ['纽曼', 91],
+                        ['苹果', 82],
+                        ['魅族', 79],
+                        ['其他', 1669],
+                    ]
+                }]
+            });
+        });
+
+        $(function () {
+            $('#container2').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '不同操作系统的价格分布'
+                },
+                xAxis: {
+                    categories: ['0-499', '500-999', '1000-1699', '1700-2799', '2800-4499', '4500-11999', '12000以上']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '操作系统分布'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -70,
+                    verticalAlign: 'top',
+                    y: 20,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>'+ this.x +'</b><br/>'+
+                            this.series.name +': '+ this.y +'<br/>'+
+                            'Total: '+ this.point.stackTotal;
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                        }
+                    }
+                },
+                series: [{
+                    name: '其他',
+                    data: [686, 37, 16, 16, 18, 45, 11]
+                }, {
+                    name: 'Android',
+                    data: [343, 466, 239, 283, 230, 97, 39]
+                }, {
+                    name: 'WindowsPhone',
+                    data: [1, 3, 2, 92, 5, 1, 0]
+                }, {
+                    name: 'IOS',
+                    data: [0, 0, 1, 3, 84, 25, 0]
+                }]
+            });
+        });
+        $(function () {
+            $('#container3').highcharts({
+                title: {
+                    text: '上市时间分布',
+                    x: -20 //center
+                },
+                xAxis: {
+                    categories: ['2016', '2015', '2014', '2013', '2012', '2011','2010', '2009', '2008及以前']
+                },
+                yAxis: {
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {},
+                series: [{
+                    name: '数量',
+                    data: [310, 1940, 653, 126, 25, 5, 3, 8, 29]
+                }]
+            });
+        });
+    </script>
 </head>
 <body>
 <br><br><br><br>
@@ -12,124 +151,9 @@
     <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
         <input type="submit" value="搜索" style="height:37px;width:80px"></div>
 </form>
-    <table align="center">
-        <tr>
-            <td><div id="main1" style="width: 600px;height: 400px;"></div></td>
-            <td><div id="main2" style="width: 600px;height: 400px;"></div></td>
-        </tr>
-        <tr>
-            <td><div id="main3" style="width: 600px;height: 400px;"></div></td>
-            <td><div id="main4" style="width: 600px;height: 400px;"></div></td>
-        </tr>
-    </table>
-<script type="text/javascript">
-    var priceList = ['1000元以下', '1000-2000元', '2000-3000元', '3000-4000元', '4000-5000元', '5000-6000元','6000元以上'];
-    var mychart1 = echarts.init(document.getElementById('main1'));
-    var option1 = {
-        tooltip: {
-            trigger: 'item'
-        },
-        title: {
-            text: '价格分布'
-        },
-        legend: {
-            x: 'right',
-            orient: 'vertical',
-            data: priceList
-        },
-        itemStyle: {
-            emphasis: {
-                shadowBlur: 200,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        },
-        series: [
-            {
-                name: '数量',
-                type: 'pie',
-                radius: '65%',
-                label: {
-                    normal: {
-                        formatter: '{d}%'
-                    }
-                },
-                data: [
-                    {value: {{ cnt.0 }}, name: '1000元以下'},
-                    {value: {{ cnt.1 }}, name: '1000-2000元'},
-                    {value: {{ cnt.2 }}, name: '2000-3000元'},
-                    {value: {{ cnt.3 }}, name: '3000-4000元'},
-                    {value: {{ cnt.4 }}, name: '4000-5000元'},
-                    {value: {{ cnt.5 }}, name: '5000-6000元'},
-                    {value: {{ cnt.6 }}, name: '6000元以上'},
-                ]
-            }
-        ]
-    }
-    mychart1.setOption(option1)
-    var mychart2 = echarts.init(document.getElementById('main2'));
-    var option2  = {
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            type: 'category',
-            data: priceList
-        },
-        yAxis: {
-            type: 'value',
-        },
-        series: [{
-            name: '数量',
-            type: 'line',
-            data: {{ cnt }}
-        }]
-    }
-    mychart2.setOption(option2)
-    var listDateList = ['2016', '2015', '2014', '2013', '2012', '2011', '2010及以前'];
-    var mychart3 = echarts.init(document.getElementById('main3'));
-    var option3 = {
-        tooltip: {
-            trigger: 'item'
-        },
-        title: {
-            text: '上市年份'
-        },
-        legend: {
-            x: 'right',
-            orient: 'vertical',
-            data: listDateList
-        },
-        itemStyle: {
-            emphasis: {
-                shadowBlur: 200,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        },
-        series: [
-            {
-                name: '数量',
-                type: 'pie',
-                radius: '65%',
-                label: {
-                    normal: {
-                        formatter: '{d}%'
-                    }
-                },
-                data: [
-                    {value: {{ cntListDate.0 }}, name: '2016'},
-                    {value: {{ cntListDate.1 }}, name: '2015'},
-                    {value: {{ cntListDate.2 }}, name: '2014'},
-                    {value: {{ cntListDate.3 }}, name: '2013'},
-                    {value: {{ cntListDate.4 }}, name: '2012'},
-                    {value: {{ cntListDate.5 }}, name: '2011'},
-                    {value: {{ cntListDate.6 }}, name: '2010及以前'},
-                ]
-            }
-        ]
-    }
-    mychart3.setOption(option3);
 
-</script>
-
+<div id="container1" style="max-width: 1000px; margin: 0 auto"></div>
+<div id="container3" style="max-width: 1000px; margin: 0 auto"></div>
+<div id="container2" style="max-width: 1000px; margin: 0 auto"></div>
 </body>
 </html>
