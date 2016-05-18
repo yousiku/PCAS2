@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from models import Mobile
 import jieba
+import re
 
 # Create your views here.
 def index(request):
@@ -30,7 +31,20 @@ def index(request):
     cntListDate[4] = Mobile.objects.filter(listDate__contains='2012').count()
     cntListDate[5] = Mobile.objects.filter(listDate__contains='2011').count()
     cntListDate[6] = Mobile.objects.all().count() - (cntListDate[0]+cntListDate[1]+cntListDate[2]+cntListDate[3]+cntListDate[4]+cntListDate[5])
-    return render(request,'index.html',{'cnt': cnt, 'cntListDate': cntListDate})
+
+    smart = []
+    nsmart = []
+    for mobile in Mobile.objects.all():
+        try:
+            year = re.findall("\d+", mobile.listDate)[0]
+        except:
+            continue
+        if mobile.isSmart==u'是':
+            smart.append([mobile.price, int(year)])
+        elif mobile.isSmart==u'否':
+            nsmart.append([mobile.price,int(year)])
+    print smart
+    return render(request,'index.html',{'cnt': cnt, 'cntListDate': cntListDate, 'smart': smart, 'nsmart': nsmart})
 
 def add(request):
     a = request.GET['a']
