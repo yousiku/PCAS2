@@ -290,6 +290,9 @@
                 }]
             });
         });
+        function tiaoMB(){
+            window.location.href="/search/";
+        }
     </script>
 </head>
 <body>
@@ -299,11 +302,22 @@
     <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
         <input type="submit" value="搜索" style="height:37px;width:80px"></div>
 </form>
+<br>
 
-<div id="container1" style="max-width: 1000px; margin: 0 auto"></div>
-<div id="container3" style="max-width: 1000px; margin: 0 auto"></div>
-<div id="container2" style="max-width: 1000px; margin: 0 auto"></div>
-<div id="container4" style="max-width: 1000px; margin: 0 auto"></div>
-<div id="container5" style="max-width: 1000px; margin: 0 auto"></div>
+<div style="margin-left: 200px">
+    请选择商品类型：
+    <select onchange="window.location=this.value">
+        <option selected value="/">手机</option>
+        <option value="/pc">笔记本</option>
+    </select>
+</div>
+
+<div style="display:inline">
+<div id="container1" style="float: left; max-width: 1000px; margin: 0 auto"></div>
+<div id="container3" style="float: left; max-width: 1000px; margin: 0 auto"></div><br>
+<div id="container2" style="max-width: 1000px; margin: 0 auto"></div><br>
+<div id="container4" style="max-width: 1000px; margin: 0 auto"></div><br>
+<div id="container5" style="max-width: 1000px; margin: 0 auto"></div><br>
+</div>
 </body>
 </html>

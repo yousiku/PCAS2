@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^add/',webapp_views.add,name='add'),
     url(r'^search/',webapp_views.search,name='search'),
     url(r'^addCompare/',webapp_views.addCompare,name='addCompare'),
+    url(r'^pc/',webapp_views.pc,name='pc'),
     url(r'^admin/', admin.site.urls),
 ]

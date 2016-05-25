@@ -24,3 +24,8 @@ class Mobile(models.Model):
     battery = models.CharField(max_length=200)
     mbSize = models.CharField(max_length=200)
     mbWeight = models.CharField(max_length=200)
+
+
+class PC(models.Model):
+    pinpai = models.CharField(max_length=20)
+    

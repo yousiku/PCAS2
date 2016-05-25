@@ -43,7 +43,6 @@ def index(request):
             smart.append([mobile.price, int(year)])
         elif mobile.isSmart==u'否':
             nsmart.append([mobile.price,int(year)])
-    print smart
     return render(request,'index.html',{'cnt': cnt, 'cntListDate': cntListDate, 'smart': smart, 'nsmart': nsmart})
 
 def add(request):
@@ -89,3 +88,6 @@ def addCompare(request):
         data_num.append(details.keywords)
         data_list.append(data_num)
     return render(request,'cmps.html',{'detail_list':detail_list, 'data_list': data_list})
+
+def pc(request):
+    return render(request,'pc.html')

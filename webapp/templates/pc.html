@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>笔记本数据统计</title>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script>
+        $(function () {
+            $('#container1').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '主要笔记本品牌商品数量'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '数量',
+                    data: [
+                        ['联想', 2542],
+                        ['ThinkPad', 3671],
+                        ['戴尔', 3547],
+                        ['华硕', 1328],
+                        ['苹果', 87],
+                        ['宏基', 1001],
+                        ['三星', 105],
+                        ['惠普', 793],
+                    ]
+                }]
+            });
+        });
+        $(function () {
+            $('#container2').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '笔记本价格分布'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '数量',
+                    data: [
+                        ['2000以下', 595],
+                        ['2000-3000', 578],
+                        ['3000-4000', 945],
+                        ['4000-5000', 4713],
+                        ['5000-6000', 3050],
+                        ['6000-7000', 2519],
+                        ['7000-8000', 1467],
+                        ['8000以上', 603],
+                    ]
+                }]
+            });
+        });
+        $(function () {
+            $('#container3').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '笔记本重量分布'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '数量',
+                    data: [
+                        ['小于1.5kg', 1938],
+                        ['1.5-2kg', 5467],
+                        ['2-2.5kg', 6022],
+                        ['>2.5kg', 553],
+                    ]
+                }]
+            });
+        });
+        $(function () {
+            $('#container4').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '笔记本尺寸分布'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '数量',
+                    data: [
+                        ['11.6', 481],
+                        ['12.5', 917],
+                        ['13.3', 1033],
+                        ['14', 6135],
+                        ['15.6', 5102],
+                        ['17.3', 265],
+                        ['其他', 103],
+                    ]
+                }]
+            });
+        });
+    </script>
+</head>
+<body>
+<br><br><br><br>
+<h1 align="center">商品比较分析系统</h1><br><br>
+<form method="get" action="/search/">
+    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px" autofocus="autofocus">
+        <input type="submit" value="搜索" style="height:37px;width:80px"></div>
+</form>
+<br>
+
+<div style="margin-left: 200px">
+    请选择商品类型：
+    <select onchange="window.location=this.value">
+        <option value="/">手机</option>
+        <option selected value="/pc">笔记本</option>
+    </select>
+</div>
+<div style="display:inline; ">
+<div id="container1" style="float: left; max-width: 1000px; margin: 0 auto"></div>
+<div id="container2" style="float: left; max-width: 1000px; margin: 0 auto"></div><br>
+<div id="container3" style="float: left; max-width: 1000px; margin: 0 auto"></div>
+<div id="container4" style="float: left; max-width: 1000px; margin: 0 auto"></div><br>
+<div id="container5" style="max-width: 1000px; margin: 0 auto"></div><br>
+</div>
+</body>
+</html>
